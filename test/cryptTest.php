@@ -19,7 +19,7 @@
  *	If not, see <http://www.gnu.org/licenses/>.
  */
 require_once(dirname(__DIR__).'/vendor/autoload.php');
-require('lss_boot.php');
+
 use \LSS\Crypt;
 
 define('CRYPT_KEY','fDCb/LbbHHktg07zvZgLniX5Bf4gpmLv1LkM6nLuPNk=');
@@ -33,7 +33,7 @@ class CryptTest extends PHPUNIT_Framework_TestCase {
 	protected $crypt = false;
 
 	protected function setUp(){
-		$this->crypt = Crypt::_get(CRYPT_KEY,CRYPT_IV);
+		$this->crypt = new Crypt(CRYPT_KEY,CRYPT_IV);
 		self::$crypted_string = $this->crypt->encrypt(TEST_STRING);
 	}
 

@@ -20,9 +20,6 @@
  */
 namespace LSS;
 
-use \Exception;
-
-if(!extension_loaded('mcrypt')) throw new Exception('MCrypt extension not present!');
 //---------------------------------------------------------
 //Crypt Library
 //	This is a shorthand library for using AES encryption
@@ -61,17 +58,13 @@ class Crypt {
 		));
 	}
 
-	//static constructor access
-	public static function _get($key,$iv){
-		return new static($key,$iv);
-	}
-
 	//-----------------------------------------------------
 	//Object Methods
 	//-----------------------------------------------------
 
 	//setup and store keys
-	protected function __construct($key,$iv){
+	public function __construct($key,$iv){
+        if(!extension_loaded('mcrypt')) throw new \Exception('MCrypt extension not present!');
 		$this->key = $key;
 		$this->iv = $iv;
 	}
@@ -98,10 +91,10 @@ class Crypt {
 		$key_size = mcrypt_get_key_size(self::$crypt_cipher,self::$crypt_mode);
 		//verify we have a key before starting
 		if(!isset($this->key) || is_null($this->key)){
-			throw new Exception('No encryption key defined in config');
+			throw new \Exception('No encryption key defined in config');
 		}
 		if(strlen(base64_decode($this->key)) < $key_size){
-			throw new Exception('Encryption key is too short, required length: '.$key_size);
+			throw new \Exception('Encryption key is too short, required length: '.$key_size);
 		}
 		return true;
 	}
@@ -111,10 +104,10 @@ class Crypt {
 		$iv_size = mcrypt_get_iv_size(self::$crypt_cipher,self::$crypt_mode);
 		//verify we have a key before starting
 		if(!isset($this->iv) || is_null($this->iv)){
-			throw new Exception('No IV key defined in config');
+			throw new \Exception('No IV key defined in config');
 		}
 		if(strlen(base64_decode($this->iv)) < $iv_size){
-			throw new Exception('Encryption IV is too shorted, required length: '.$iv_size);
+			throw new \Exception('Encryption IV is too shorted, required length: '.$iv_size);
 		}
 		return true;
 	}
