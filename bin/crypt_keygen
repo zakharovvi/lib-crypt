@@ -20,5 +20,5 @@
  *	If not, see <http://www.gnu.org/licenses/>.
 */
 
-require(dirname(__DIR__).'/lib/crypt.php');
-echo Crypt::keyCreate()."\n";
+require_once __DIR__.'/../LSS/Crypt.php';
+echo \LSS\Crypt::keyCreate()."\n";
