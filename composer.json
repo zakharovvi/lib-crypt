@@ -23,8 +23,8 @@
 		}
 	]
 	,"require": {
-		 "php":					">=5.3.2"
-		,"openlss/lib-config":	"dev-master"
+		 "php":					">=5.3.2",
+         "ext-mcrypt":          "*"
 	}
 	,"require-dev": {
 		 "openlss/core-boot":	"dev-master"
